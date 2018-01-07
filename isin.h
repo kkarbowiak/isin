@@ -21,11 +21,11 @@ namespace isin_internal
             {
             }
 
-            bool operator==(T const & other) const
+            friend bool operator==(T const & lhs, is_in_check<T> const & rhs)
             {
-                for (auto a : m_args)
+                for (auto a : rhs.m_args)
                 {
-                    if (a == other)
+                    if (a == lhs)
                     {
                         return true;
                     }
@@ -42,12 +42,6 @@ namespace isin_internal
     inline is_in_check<T> is_in_get(std::initializer_list<T> const & args)
     {
         return is_in_check<T>(args);
-    }
-
-    template<typename T>
-    inline bool operator==(T const & lhs, is_in_check<T> const & rhs)
-    {
-        return (rhs == lhs);
     }
 }
 
