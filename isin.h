@@ -9,6 +9,7 @@
 
 
 #define is_in(...) == isin_internal::is_in_get({__VA_ARGS__})
+#define is_not_in(...) != isin_internal::is_in_get({__VA_ARGS__})
 
 namespace isin_internal
 {
@@ -32,6 +33,19 @@ namespace isin_internal
                 }
 
                 return false;
+            }
+
+            friend bool operator!=(T const & lhs, is_in_check<T> const & rhs)
+            {
+                for (auto a : rhs.m_args)
+                {
+                    if (a == lhs)
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
             }
 
         private:
