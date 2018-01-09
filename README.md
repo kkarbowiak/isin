@@ -15,7 +15,7 @@ if ((event == ERROR_1) ||
 Ever missed the elegant Pythonic idiom in C++ code?
 
 ```python
-if event is in [ERROR_1, ERROR_2, ERROR_3, ...]:
+if event in [ERROR_1, ERROR_2, ERROR_3, ...]:
     # process
 ```
 
