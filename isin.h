@@ -6,6 +6,7 @@
 #define ISIN_H__DDK
 
 #include <initializer_list>
+#include <algorithm>
 
 
 #define is_in(...) == isin_internal::is_in_get(__VA_ARGS__)
@@ -25,29 +26,13 @@ namespace isin_internal
             template<typename T>
             friend bool operator==(T const & lhs, is_in_check<C> const & rhs)
             {
-                for (auto a : rhs.m_args)
-                {
-                    if (a == lhs)
-                    {
-                        return true;
-                    }
-                }
-
-                return false;
+                return std::any_of(rhs.m_args.begin(), rhs.m_args.end(), [&](T const & v){ return (lhs == v); });
             }
 
             template<typename T>
             friend bool operator!=(T const & lhs, is_in_check<C> const & rhs)
             {
-                for (auto a : rhs.m_args)
-                {
-                    if (a == lhs)
-                    {
-                        return false;
-                    }
-                }
-
-                return true;
+                return std::none_of(rhs.m_args.begin(), rhs.m_args.end(), [&](T const & v){ return (lhs == v); });
             }
 
         private:
