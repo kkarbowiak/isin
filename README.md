@@ -22,7 +22,17 @@ if event in [ERROR_1, ERROR_2, ERROR_3, ...]:
 Miss no longer as this little library makes it possible to transform the first `if` statement to python-like below code:
 
 ```c++
-if (event is_in(ERROR_1, ERROR_2, ERROR_3, ...))  // notice just a whitespace separating event and is_in
+if (event is_in({ERROR_1, ERROR_2, ERROR_3, ...}))  // notice just a whitespace separating event and is_in and the braces
+{
+    // process
+}
+```
+
+Checking in containers is also supported:
+
+```c++
+std::vector<Events> evs = {ERROR_1, ERROR_2, ERROR_3, ...};
+if (event is_in(evs))
 {
     // process
 }
@@ -36,7 +46,7 @@ Below is a short example. Compile it and try running with several command-line a
 
 int main(int argc, char * /*argv*/[])
 {
-    if (argc is_in(2, 3, 4, 5))
+    if (argc is_in({2, 3, 4, 5}))
     {
         std::cout << "true\n";
     }
