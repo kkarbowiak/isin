@@ -16,7 +16,7 @@ enum Values
     EVALUE_5
 };
 
-TEST_CASE("test is_in with int and braced-list")
+TEST_CASE("test is_in and is_not_in with int and braced-list")
 {
     int v = 2;
 
@@ -25,9 +25,15 @@ TEST_CASE("test is_in with int and braced-list")
     CHECK(v is_in({1, 2, 3}));
     CHECK_FALSE(v is_in({1}));
     CHECK_FALSE(v is_in({1, 3}));
+
+    CHECK_FALSE(v is_not_in({2}));
+    CHECK_FALSE(v is_not_in({1, 2}));
+    CHECK_FALSE(v is_not_in({1, 2, 3}));
+    CHECK(v is_not_in({1}));
+    CHECK(v is_not_in({1, 3}));
 }
 
-TEST_CASE("test is_in with enum and braced-list")
+TEST_CASE("test is_in and is_not_in with enum and braced-list")
 {
     Values v = EVALUE_2;
 
@@ -36,9 +42,15 @@ TEST_CASE("test is_in with enum and braced-list")
     CHECK(v is_in({EVALUE_1, EVALUE_2, EVALUE_3}));
     CHECK_FALSE(v is_in({EVALUE_1}));
     CHECK_FALSE(v is_in({EVALUE_1, EVALUE_3}));
+
+    CHECK_FALSE(v is_not_in({EVALUE_2}));
+    CHECK_FALSE(v is_not_in({EVALUE_1, EVALUE_2}));
+    CHECK_FALSE(v is_not_in({EVALUE_1, EVALUE_2, EVALUE_3}));
+    CHECK(v is_not_in({EVALUE_1}));
+    CHECK(v is_not_in({EVALUE_1, EVALUE_3}));
 }
 
-TEST_CASE("test is_in with char and braced-list")
+TEST_CASE("test is_in and is_not_in with char and braced-list")
 {
     char v = 'b';
 
@@ -47,9 +59,15 @@ TEST_CASE("test is_in with char and braced-list")
     CHECK(v is_in({'a', 'b', 'c'}));
     CHECK_FALSE(v is_in({'a'}));
     CHECK_FALSE(v is_in({'a', 'c'}));
+
+    CHECK_FALSE(v is_not_in({'b'}));
+    CHECK_FALSE(v is_not_in({'a', 'b'}));
+    CHECK_FALSE(v is_not_in({'a', 'b', 'c'}));
+    CHECK(v is_not_in({'a'}));
+    CHECK(v is_not_in({'a', 'c'}));
 }
 
-TEST_CASE("test is_in with std::string and braced-list")
+TEST_CASE("test is_in and is_not_in with std::string and braced-list")
 {
     std::string v = "bar";
 
@@ -58,9 +76,15 @@ TEST_CASE("test is_in with std::string and braced-list")
     CHECK(v is_in({"foo", "bar", "baz"}));
     CHECK_FALSE(v is_in({"foo"}));
     CHECK_FALSE(v is_in({"foo", "baz"}));
+
+    CHECK_FALSE(v is_not_in({"bar"}));
+    CHECK_FALSE(v is_not_in({"foo", "bar"}));
+    CHECK_FALSE(v is_not_in({"foo", "bar", "baz"}));
+    CHECK(v is_not_in({"foo"}));
+    CHECK(v is_not_in({"foo", "baz"}));
 }
 
-TEST_CASE("test is_in with int and std::vector")
+TEST_CASE("test is_in and is_not_in with int and std::vector")
 {
     int v = 2;
     std::vector<int> vec1 = {2};
@@ -74,4 +98,10 @@ TEST_CASE("test is_in with int and std::vector")
     CHECK(v is_in(vec3));
     CHECK_FALSE(v is_in(vec4));
     CHECK_FALSE(v is_in(vec5));
+
+    CHECK_FALSE(v is_not_in(vec1));
+    CHECK_FALSE(v is_not_in(vec2));
+    CHECK_FALSE(v is_not_in(vec3));
+    CHECK(v is_not_in(vec4));
+    CHECK(v is_not_in(vec5));
 }
